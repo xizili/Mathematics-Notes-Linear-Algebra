@@ -1,0 +1,36 @@
+\documentclass[a4paper]{article}
+
+\input{_header}
+\input{_title}
+\input{_shorthand}
+
+\begin{document}
+\maketitle
+
+\input{_introduction}
+
+\tableofcontents
+\newpage
+
+\input{_chapter1}
+
+\newpage
+\input{_chapter2}
+
+\newpage
+\input{_chapter3}
+% Lorem ipsum \annotate[id=r,comment={$ay=p$}]{dolor sit amet}, consectetur adipiscing elit. Integer luctus molestie hendrerit. Suspendisse nec tellus tellus.\note[id=b]{$xx=yy$} \deleted[id=r]{aaaaaaa}{bbbbbbbbbb}
+
+% luctus et ultrices posuere cubilia Curae; \replaced[id=r]{Donec et massa in arcu sagittis posuere a a erat.}{Vivamus tincidunt nec purus vitae porttitor.} umst. Aliquam molestie, sem eu suscipit pharetra, odio turpis tristique odio, molestie egestas sapien massa in elit.\note[id=b]{Fusce eget sagittis eros. Donec a posuere elit, vitae congue augue.} Donec semper mi felis, id cursus turpis pretium in.
+
+\newpage
+\input{_appendix}
+
+\newpage
+\begin{multicols}{2}
+    \bibliographystyle{apalike}
+    \bibliography{references}
+\end{multicols}
+
+
+\end{document}

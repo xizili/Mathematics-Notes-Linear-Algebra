@@ -1,0 +1,1248 @@
+\section{Oh! Bilinear Form}
+
+\subsection{Concept Map}
+
+\[
+\begin{tikzcd}
+%%%%%%%%%%%%% row 0 %%%%%%%%%%%%%
+&
+&\hyperref[def:map]{\underline{map}}
+\arrow[dl]
+\arrow[dr] 
+\\
+%%%%%%%%%%%%% row 1 %%%%%%%%%%%%%
+&\parbox{5em}{\hyperref[def:linear-map]{\underline{linear map}} \\ \centering \textnormal{(l.m.)}}
+\arrow[dl]
+\arrow[dd] 
+\arrow[dddl] 
+\arrow[loop right, dashed, out=-35, in=-15, looseness = 16] 
+&  
+&\parbox{7em}{\hyperref[def:bilinear-form]{\underline{\textnormal{bilinear form}}} \\ \centering \textnormal{(b.f.)}}  
+\arrow[d] 
+&\textnormal{conjugate linear fcn}  \arrow[d] 
+\\
+%%%%%%%%%%%%% row 2 %%%%%%%%%%%%%
+\parbox{6em}{\hyperref[def:diagonalisable]{\underline{diagonalisable}} \\ \centering \textnormal{l.m.}}
+\arrow[dr, crossing over, "\mathcal{V}_{\lambda} \otimes \mathcal{V}_{\lambda}^{\perp} = \mathcal{V}"' red] 
+& 
+&|[blue]| 
+\parbox{9em}{\centering \textnormal{adjoint} $\f^*$ \textnormal{ of } $\f$\\ 
+$\langle \f(\b{x}), \b{y} \rangle = \langle \x,\f^*(\y) \rangle$}
+\arrow[dl, dashed, blue] 
+\arrow[d, dashed, blue] 
+& |[blue]| \parbox{7.5em}{\hyperref[def:positive-definite]{\underline{\textbf{positive definite}}}\\ \centering \hyperref[def:positive-definite]{\underline{\textbf{b.f.}}}} 
+\arrow[l, dashed, blue] 
+\arrow[r, rightharpoonup, shift left = 0.5, OliveGreen]
+\arrow[r, leftharpoondown, shift right = 0.5, OliveGreen]
+\arrow[llldd, bend left=25, dashed, blue]
+\arrow[dr, squiggly, blue]
+&|[OliveGreen]| \textnormal{(Hermitian form)} 
+\\
+%%%%%%%%%%%%% row 3 %%%%%%%%%%%%%
+& |[blue]|
+\parbox{6em}{\centering \textnormal{normal l.m.} \\ 
+$\f^* \circ \f = \f \circ \f^*$}
+\arrow[dl]
+& |[blue]|
+\parbox{6em}{\centering \textnormal{self-adjoint l.m.} \\ 
+$\f = \f^*$}
+&
+&\parbox{7em}{orthonormal basis of $\VR$:\\ 
+$\bullet$ \textnormal{exists: the matrix of p.d.b.f. w.r.t such basis is identity matrix} \\ 
+$\bullet$ \textnormal{not unique: change-of-basis matrix is \textcolor{blue}{\underline{unitary}} matrix}}
+\\
+%%%%%%%%%%%%% row 4 %%%%%%%%%%%%%
+|[blue]| 
+\parbox{8em}{\centering \textnormal{unitary l.m.} \\ 
+$\langle \f(\b{x}), \f(\b{y}) \rangle = \langle \x,\y \rangle$}
+&
+&\parbox{9em}{the matrix of a unitary l.m. under an orthonormal basis is a unitary matrix $\b{M}$ which satisfies $\b{M^\T M = I}$}
+\arrow[rru, dashed, no head, blue]
+\arrow[ll, squiggly, no head, blue]
+\end{tikzcd}
+\]
+
+
+\noindent $\longrightarrow$  the end is a subset of the start.\\
+$\dashrightarrow$ the end is defined partly based on the start.\\
+$\rightleftharpoons \>\> $ parallel concepts.\\
+The dashed loop symbol denotes an operation from the start to the end.\\
+The squiggly line denotes the properties of the start.\\
+The dashed line (arrow with no head) links the same concept.\\
+The blue ``infected" area shows the conceptual region that is partially based on the positive definite bilinear forms.\\
+The red highlighted concept is insightful.
+
+
+\clearpage
+
+
+
+
+
+
+\subsection{Bilinear form}
+
+\begin{definition}[\textbf{bilinear form}]\label{def:bilinear-form}
+Let a map $\langle \cdot, \cdot \rangle: \VF \times \VF \to \F$. 
+If $\langle \x, \cdot \rangle$ and $\langle \cdot, \y \rangle$ are both linear maps, then $\langle \cdot, \cdot \rangle$ is \textbf{bilinear}, or called a \textbf{bilinear form} on $\VF$.
+\end{definition}
+
+
+
+\begin{proposition}[\textbf{matrices of bilinear forms}]
+\label{matrix_of_bilinear_form}
+Let the map $\langle \cdot, \cdot \rangle: \VF \times \VF \to \F$ be a bilinear form.
+Fixing a basis $\mathcal{B} = \{ \vv_i \}_{i=1}^n$ of $\VF$, 
+construct a matrix 
+%
+\begin{equation*}
+    \b{A} := [\b{a}_{ij}] \textnormal{  with  } \b{a}_{ij} = \langle \vv_i, \vv_j \rangle.
+\end{equation*}
+%
+Such matrix $\b{A}$ is called the \textbf{matrix of the bilinear form $\langle \cdot, \cdot \rangle$ w.r.t basis $\mathcal{B}$}, and it satisfies
+%
+\begin{equation*}
+ \langle \x, \y \rangle = \x^\T_{\mathcal{B}} \b{A} \y_{\mathcal{B}},
+\end{equation*}
+%
+where \annotate[id=b,comment={$\x_{\mathcal{B}} = [k_1, \cdots, k_n]^\T$, if $\x = \sum_{i=1}^n k_i \vv_i$ for some $k_i \in \F$}]
+{$\x_{\mathcal{B}} \in \F^n$ is the column vector representation of $\x$ w.r.t. the basis $\mathcal{B}$}.
+\end{proposition}
+%
+\begin{proof}
+For random $\x,\y \in \VF$ w.r.t. the basis $\mathcal{B}$, we can write down
+$\x_{\mathcal{B}} = [k_1,k_2, \cdots, k_n]^\T$ and 
+$\y_{\mathcal{B}} = [l_1,l_2, \cdots, l_n]^\T$.
+\begin{align*}
+    \langle \x, \y \rangle
+    &= \langle \sum_{i=1}^n k_i \vv_i, \sum_{j=1}^n l_j \vv_j \rangle, \ \textnormal{ in } \VF \times \VF \to \F\\
+    &= \sum_{i=1}^n k_i \langle \vv_i, \sum_{j=1}^n l_j \vv_j \rangle, \ \textnormal{ due to linearity of }  \langle \x, \cdot \rangle \\
+    &= \sum_{i=1}^n k_i \sum_{j=1}^n l_j \langle \vv_i, \vv_j \rangle, \ \textnormal{ due to linearity of }  \langle \cdot, \y \rangle \\
+    &= \sum_{i=1}^n \sum_{j=1}^n k_i a_{ij} l_j,\\
+    &= [k_1, \cdots, k_n] 
+   \begin{bmatrix}
+    a_{1,1} &\cdots &a_{1,n}\\
+    \vdots  &\ldots &\vdots\\
+    a_{n,1} &\cdots &a_{n,n}
+   \end{bmatrix}
+   \begin{bmatrix}
+   l_1\\
+   \vdots\\
+   l_n
+   \end{bmatrix}, \ \textnormal{ in } \F^n \times \F^n \to \F \\
+    &= \x^\T_{\mathcal{B}} \b{A} \y_{\mathcal{B}}.
+\end{align*}
+%
+\end{proof}
+
+
+\begin{example}\label{example:bf1}
+Let $P^2_{\R}$ denote the space of real polynomials of degree at most $2$. 
+Then $P^2_{\R}$ is a vector space of dimension $3$, as it has a natural basis $\{1, x, x^2 \}$.
+Define a map $\langle \cdot, \cdot \rangle: P^2_{\R} \times P^2_{\R} \to \R$ by
+$$\langle \f, \g \rangle = \int_{0}^1 \f(x) \g(x) \operatorname{d\textnormal{x}}.$$
+Verify that $\langle \cdot, \cdot \rangle$ is a bilinear form and find the matrix of such bilinear form w.r.t. a chosen basis.
+(\hyperref[answer:bf1]{answer})
+%
+\end{example}  
+
+\begin{example}\label{example:bf2}
+%
+Define a map $\langle \cdot, \cdot \rangle: \R^2 \times \R^2 \to \R$ by 
+%
+$$\langle \x, \y \rangle = x_1y_1 + 2x_1y_2 + 2x_2y_1 + 3x_2y_2,$$ 
+%
+where $\x = [x_1, x_2]^\T$, $\x = [y_1, y_2]^\T$.
+Verify that $\langle \cdot, \cdot \rangle$ is a bilinear form and find the matrix of such bilinear form w.r.t. a chosen basis.  (\hyperref[answer:bf2]{answer})
+
+
+%
+\end{example}
+
+\begin{example}\label{example:bf3}
+Define a map $\langle \cdot, \cdot \rangle: \R^n \times \R^n \to \R$ by $$\langle \x, \y \rangle = \Vert \x-\y \Vert,$$ where $\Vert \cdot \Vert$ is the Euclidean norm (also called 2-norm or $L^2$ norm), i.e., $\Vert \x-\y \Vert = \sqrt{\sum_{i=1}^n (x_i - y_i)^2}$.
+Verify that \textbf{Euclidean norm on $\R^n$ is NOT a bilinear form}. (\hyperref[answer:bf3]{answer})
+%
+\end{example}
+
+\begin{example}\label{example:bf4}
+%
+Define a map $\langle \cdot, \cdot \rangle: \R^n \times \R^n \to \R$ by 
+$$\langle \x, \y \rangle = \x \cdot \y$$ 
+where $\cdot$ is the inner product, i.e., $\x \cdot \y = \sum_{i=1}^n x_iy_i$.
+Verify that \textbf{inner product on $\R^n$ is a bilinear form} and find the matrix of such bilinear form w.r.t. a chosen basis.  (\hyperref[answer:bf4]{answer})
+%
+\end{example}
+
+
+\begin{theorem}[\textbf{equivalent definition of bilinear forms}]\label{thm:bilinear-def-2}
+Let $\mathcal{V}^\textnormal{dual} = \{ \textnormal{linear maps} \g: \VF \to \F \}$.
+Any linear map $\G: \VF \to \mathcal{V}^\textnormal{dual}$ is an equivalent form of a bilinear form $\langle \cdot, \cdot \rangle$ on $\VF$. (\hyperref[proof:bilinear-def-2]{proof})
+\end{theorem}
+
+
+
+\begin{remark}[\textbf{quadratic map}]
+Bilinear forms are sometimes called \textit{quadratic maps}, because the shifting and the scaling (linear operations) of the two arguments result in a quadratic-rule-like transformation:
+%
+$$ \langle k \x+ \x', l \y +\y' \rangle = kl \langle  \x, \y \rangle + l\langle  \x', \y \rangle + k\langle  \x, \y' \rangle + \langle  \x', \y' \rangle,$$
+%
+for any $k,l \in \F$ and $ \x,\y,\x',\y' \in \VF$, whereas for reals' multiplication,
+$    (kx+x')(ly+y') = klxy + lx'y + kxy' + x'y'.$
+\end{remark}
+
+
+\subsubsection{Orthonormal basis}
+
+\begin{definition}[\textbf{orthonormal basis}]
+A basis $\{\vv_i\}$ of $\VF$ is an \textbf{orthonormal} basis associated with a bilinear form $\langle \cdot, \cdot \rangle: \VF \times \VF \to \F$ if the bilinear form of any two basis satisfies
+%
+\begin{equation*}
+    \langle \vv_i, \vv_j \rangle = 
+    \left\{ 
+    \begin{array}{cccc}
+    0 &  \mbox{if}  & i \neq j & (orthogonal) \\
+    1 &  \mbox{if}  & i=j & (normalised)
+    \end{array}
+    \right.
+\end{equation*}
+%
+where $0,1 \in \F$.\\
+%
+\end{definition}
+%
+\begin{remark}
+In the definition of orthonormal basis, $\F= \R$ is not a necessity.
+Any field has 0 and 1 by definition: 0 is the element added by which gives rise to itself; 1 is the element multiplied by which gives rise to itself. 
+\end{remark}
+%
+\begin{example}
+    $\F \neq \R$???????????
+\end{example}
+%
+\begin{remark}
+Fix a random bilinear form $\langle \cdot, \cdot \rangle: \VF \times \VF \to \F$.
+If there exists an orthonormal basis $\mathcal{B} = \{\vv_i\}$ of $\VF$ associated with the bilinear form $\langle \cdot, \cdot \rangle$, then the matrix of such bilinear form w.r.t. basis $\mathcal{B}$ is an identity matrix:
+%
+$$\b{A} =
+    \begin{bmatrix}
+        1        &0       &\cdots   &0\\
+        0        &1       &\cdots   &0\\
+        \vdots   &\vdots  &\ddots   &\vdots\\
+        0        &0       &\cdots   &1
+    \end{bmatrix}.$$
+%
+hence
+%
+\begin{equation*}
+ \langle \x, \y \rangle = \x^\T_{\mathcal{B}} \b{A} \y_{\mathcal{B}} = \x^\T_{\mathcal{B}} \y_{\mathcal{B}}.
+\end{equation*}
+%
+That says, under an orthonormal basis, the bilinear form $\langle \cdot, \cdot \rangle$ of any two vectors in $\VF$ becomes a quasi-inner-product (exactly a inner product if $\F = \R$; a quasi-inner-product otherwise).
+%
+\end{remark}
+%
+\begin{example}[\textbf{orthonormal basis of } \Cref{example:bf1}]
+Let $P^2_{\R}$ denote the space of real polynomials of degree at most $2$. 
+The bilinear form $\langle \cdot, \cdot \rangle: P^2_{\R} \times P^2_{\R} \to \R$ is defined by
+%
+$$\langle \f, \g \rangle = \int_{0}^1 \f(x) \g(x) \operatorname{d\textnormal{x}}.$$
+%
+Verify that the basis 
+%
+$$\{1, ~\ 2\sqrt{3}(x-\frac12), ~\ 2\sqrt{\frac{15}{7}}(x^2-x-\frac16) \}$$
+%
+of the vector space $P^2_{\R}$ is an orthonormal basis:\\
+%
+$\bullet$ $\langle \vv_1, \vv_2 \rangle = \int_{0}^1 1 \cdot 2\sqrt{3}(x-\frac12) \operatorname{d\textnormal{x}} = 0$\\
+$\bullet$ $\langle \vv_1, \vv_3 \rangle = \int_{0}^1 1 \cdot 2\sqrt{\frac{15}{7}} (x^2-x-\frac16) \operatorname{d\textnormal{x}} = 0$\\
+$\bullet$ $\langle \vv_2, \vv_3 \rangle = \int_{0}^1 2\sqrt{3}(x-\frac12) \cdot 2\sqrt{\frac{15}{7}}(x^2-x-\frac16) \operatorname{d\textnormal{x}} = 0$\\
+$\bullet$ $\langle \vv_1, \vv_1 \rangle = \int_{0}^1 1 \operatorname{d\textnormal{x}} = 1$\\
+$\bullet$ $\langle \vv_2, \vv_2 \rangle = \int_{0}^1 12(x-\frac12)^2 \operatorname{d\textnormal{x}} = 1$\\
+$\bullet$ $\langle \vv_3, \vv_3 \rangle = \int_{0}^1 
+\frac{60}{7}(x^2-x-\frac16)^2 \operatorname{d\textnormal{x}} = 1$\\
+
+\noindent Therefore, this basis is an \textbf{orthonormal} basis.
+%
+\end{example}
+%
+\begin{example}[\textbf{orthonormal basis of } \Cref{example:bf2}]
+%
+The bilinear form $\langle \cdot, \cdot \rangle: \R^2 \times \R^2 \to \R$ is defined by 
+%
+$$\langle \x, \y \rangle = x_1y_1 + 2x_1y_2 + 2x_2y_1 + 3x_2y_2,$$ 
+%
+where $\x =
+\begin{bmatrix}
+    x_1 \\
+    x_2
+\end{bmatrix}$, 
+$\y = 
+\begin{bmatrix}
+    y_1 \\
+    y_2
+\end{bmatrix}
+$.\\
+If there exists an orthonormal basis $\{ \vv_a, \vv_b \}$ of $\R^2$, then the basis vectors satisfy
+%
+\begin{align*}
+    \langle \vv_a, \vv_a \rangle &= v_{a,1}^2 + 2v_{a,1}v_{a,2} + 2v_{a,2}v_{a,1} + 3v_{a,2}^2 = 1 \\
+    \langle \vv_a, \vv_b \rangle &= v_{a,1}v_{b,1} + 2v_{a,1}v_{b,2} + 2v_{a,2}v_{b,1} + 3v_{a,2}v_{b,2} = 0\\
+    \langle \vv_b, \vv_a \rangle &=  v_{b,1}v_{a,1} + 2v_{b,1}v_{a,2} + 2v_{b,2}v_{a,1} + 3v_{b,2}v_{a,2} = 0\\
+    \langle \vv_b, \vv_b \rangle &= v_{b,1}^2 + 2v_{b,1}v_{b,2} + 2v_{b,2}v_{b,1} + 3v_{b,2}^2 = 1
+\end{align*}
+%
+However, this does not return real-valued solutions of $\vv_a, \vv_b$.
+Therefore, there does \textbf{NOT} exist any orthonormal basis of $\R^2$ w.r.t. the bilinear form.
+%
+\end{example}
+%
+\begin{theorem}[\textbf{existence of orthonormal basis???}]
+Fix a random bilinear form $\langle \cdot, \cdot \rangle$ on $\VF$.
+%
+\begin{align*}
+    &\textnormal{There exists an orthonormal basis of } \VF \textnormal{ w.r.t. the bilinear form.} \\
+    \Leftrightarrow \quad &\textnormal{The bilinear form is \textcolor{dred}{non-degenerate} and symmetric, and the field } \F \textnormal{ is \textcolor{blue}{algebraically closed}.}
+\end{align*}
+%
+\note[id=r]{A bilinear form is non-degenerate if \\ $\langle \x, \y \rangle = 0, \forall \y \implies \x = \b{0}$.}
+\note[id=b]{A field is algebraically closed if any polynomial over the field has a solution in the field. \\ Importantly, $\R$ is not algebraically closed and $\C$ is algebraically closed.}
+\end{theorem}
+
+
+\subsubsection{Adjoint and normal operators}
+
+\begin{definition}[\textbf{adjoint}]
+Let $\b{f}$ be a linear map on $\VF$. 
+Then, the linear map $\bm f^*$ is the adjoint of $\bm f$ w.r.t a bilinear form $\langle \cdot, \cdot \rangle$ on $\VF$, if
+$$\langle \b{f}(\x), \y \rangle = \langle \x, \b{f^*}(\y) \rangle, ~\  \forall \x,\y \in \VF .$$ 
+\end{definition}
+%
+\begin{proposition}[\textbf{existence of adjoint}]
+Fix a random bilinear form $\langle \cdot, \cdot \rangle$ on $\VF$.
+%
+\begin{align*}
+    & The adjoint \b{f^*} \textnormal{ w.r.t. the bilinear form exists.} \\
+    \Leftrightarrow \quad &\textnormal{The bilinear form is \textcolor{dred}{non-degenerate}.}
+\end{align*}
+%
+\end{proposition}
+%
+\begin{proof}
+    
+\end{proof}
+%
+\begin{proposition}[\textbf{structure of adjoint}]
+Let $\lambda$ be an eigenvalue of the linear map $\bm f$.
+Let $\mu$ be an eigenvalue of the adjoint $\bm f^*$ of such linear map w.r.t. a non-degenerate bilinear form $\langle \cdot, \cdot \rangle$.
+Then, any generalised eigenspace of $\bm f$ is orthogonal to that of $\bm f^*$, as long as the associated eigenvalue of one is different to the conjugate of another, i.e.,
+%
+$$ \lambda \neq \bar{\mu} \implies V_{\lambda}^\b{\bm f} \perp V_{\mu}^{\bm f^*}.$$
+%
+where $V_{\lambda}^\b{\bm f}$ is the generalised eigenspace of $\bm f$ associated with the eigenvalue $\lambda$, $V_{\mu}^{\bm f^*}$ is the generalised eigenspace of $\bm f^*$ associated with the eigenvalue $\mu$.
+%
+\end{proposition}
+%
+\begin{proof}
+Assume that nonzero vector $\vv \in V_{\lambda}^\b{\bm f}$, i.e.,
+%
+\begin{equation*}
+    (\b{f} - \lambda \b{I})^n  \vv = \b{0},
+\end{equation*}
+%
+for some integer $n>0$ and indentity map $\b{I}$.\\
+Assume that nonzero $\w \in V_{\mu}^{\bm f^*}$, i.e.,
+%
+\begin{equation*}
+    (\b{f} - \mu\b{I})^m  \w = \b{0}.
+\end{equation*}
+%
+for some integer $m>0$.\\
+Note that when $m=n=1$, then both $\bm f$ and $\bm f^*$ are diagonalisable linear maps.\\
+Substituting $(\b{f} - \lambda \b{I})^n \vv$ into the first argument of the bilinear form, on the one hand,
+%
+\begin{align*}
+    \langle (\b{f} - \lambda \b{I})^n \vv, \w \rangle = \langle 0, \w \rangle = 0
+\end{align*}
+%
+on the other hand,
+%
+\begin{align*}
+    \langle (\b{f} - \lambda \b{I})^n \vv, \w \rangle 
+    &= \langle \vv, [(\b{f} - \lambda \b{I})^n]^* \w \rangle \\
+    &= \langle \vv, (\b{f}^* - \bar{\lambda} \b{I})^n \w \rangle ~\ \textnormal{due to \textunderscore{properties of adjoints}.}
+\end{align*}
+%
+Let $\w' = (\b{f}^* - \bar{\lambda} \b{I})^n\w$.
+Then, we obtain $\langle \vv, \w' \rangle = 0$, which implies 
+%
+$$ \vv \perp \w', \textnormal{ if } \w' \neq \b{0}.$$
+%
+Since the map $(\b{f}^* - \bar{\lambda} \b{I})$ always preserves the generalised eigenspaces of $\bm f^*$ (see proposition), 
+%
+$$ \w \in V_{\mu}^{\bm f^*} \implies  \w' \in V_{\mu}^{\bm f^*}.$$
+%
+If $\lambda \neq \bar{\mu}$, the map $(\b{f}^* - \bar{\lambda} \b{I})$ from $V_{\mu}^{\bm f^*}$ to $V_{\mu}^{\bm f^*}$ is an isomorphism (see proposition), hence
+%
+$$ \w \in V_{\mu}^{\bm f^*} \implies \{\w'= (\b{f}^* - \bar{\lambda} \b{I})\w ~\ | ~\ \w \in V_{\mu}^{\bm f^*}\} = V_{\mu}^{\bm f^*}.$$
+%
+Therefore, by varying $\w$ in the domain of $V_{\mu}^{\bm f^*}$, $\w'$ traverses the co-domain $V_{\mu}^{\bm f^*}$, hence
+$$\vv \perp V_{\mu}^{\bm f^*}.$$\\
+Since $\vv$ is randomly chosen from $V_{\lambda}^{\bm f}$, 
+$$V_{\lambda}^{\bm f} \perp V_{\mu}^{\bm f^*}.$$
+
+\end{proof}
+%
+% \begin{proof}
+% Choose a basis $\mathcal{B}$ of $\VF$, then denote the matrix of the linear map $\f$ w.r.t. the basis $\mathcal{B}$ by matrix $\b{M}$: 
+% $$ [\b{f}(\x)]_{\mathcal{B}} := \b{M}\x_{\mathcal{B}}. $$
+% For any random linear map $\b{f^*}$, the matrix of the linear map $\f^*$ w.r.t. the basis $\mathcal{B}$ could be denoted by some fixed matrix $\b{M}^*$.\\
+% Denote the matrix of the positive definite bilinear form w.r.t. the basis $\mathcal{B}$ be $\b{A}$. 
+% If there exists a linear $\b{f^*}$ such that $\langle \b{f}(\x), \y \rangle = \langle \x, \b{f^*}(\y) \rangle$ holds, then \\
+% %
+% \begin{align*}
+%     & \langle \b{f}(\x), \y \rangle = \langle \x, \b{f^*}(\y) \rangle \\
+%     \Leftrightarrow \ & [\b{f}(\x)]_{\mathcal{B}}^\T \b{A} \y_{\mathcal{B}} = \x_{\mathcal{B}}^\T \b{A} [\b{f}^*(\y)]_{\mathcal{B}} ~\ \text{ let the matrix representation of the linear map } \b{f^*} \text{ be } \b{X}\\
+%     \Leftrightarrow \ & \x_{\mathcal{B}}^\T \b{M}^\T \b{A} \y_{\mathcal{B}} = \x_{\mathcal{B}}^\T \b{A} \b{X}\y_{\mathcal{B}} ~\ \text{ for any } x,y\\
+%     \Leftrightarrow \ & \b{M}^\T \b{A} = \b{A} \b{X}\\
+%     \Leftrightarrow \  & \b{X} = \b{A}^{-1} \b{M}^\T \b{A}.
+% \end{align*}
+% %
+% Therefore, 
+% We can always choose an orthonormal basis of $\VR$ for a positive definite bilinear form, thus $\b{A} = \b{I}$.
+% That is, the matrix $\b{M}$ of a linear map w.r.t an orthonormal basis of $\VR$ has the adjoint $\b{M^*} = \b{M}^\T$ w.r.t. a bilinear form on $\VR$ .
+% \end{proof}
+
+
+\begin{theorem}
+Any matrix $\bm A$ of a bilinear form can be re-written as the product of $\b{B^\T B}$ for some invertible matrix $\b{B}$.(???)
+\end{theorem}
+
+
+\begin{definition}[\textbf{normal map}]
+A linear map $\f$ is \textbf{normal}, if it commutes with its adjoint $\f^*$ with respect to a bilinear form $\langle \cdot, \cdot \rangle$, i.e., $$\f \circ \f^* =\f^* \circ \f.$$
+\end{definition}
+%
+\begin{proposition}
+    If AB=BA, then they share eigenbasis.
+\end{proposition}
+%
+\begin{theorem}
+Any symmetric matrix is normal.
+\end{theorem}
+%
+\begin{proof}
+Let $\b{M}$ be a symmetric matrix.
+Take it as the matrix of some linear map on $\VF$ w.r.t. some basis $\mathcal{B}$.
+Then, the adjoint $\b{M}^* = \b{A}^\T \b{M}^\T \b{A}$, where $\b{A}$ is the matrix of the positive definite bilinear form on $\VF$ w.r.t. the basis $\mathcal{B}$.
+
+Note that $\b{A} = \b{A}^\T$ due to positive definiteness of the bilinear form.
+The condition is $\b{M} = \b{M}^\T$.
+Then,
+\begin{align*}
+    \b{MM^*} &= \b{M}(\b{A}^\T \b{M}^\T \b{A}) \\
+    & = \b{MAMA}\\
+    & = (\b{A}^\T \b{M}^\T \b{A}) \b{M} \\
+    & = \b{M^*M},
+\end{align*}
+hence $\b{M}$ is normal.
+\end{proof}
+
+\begin{theorem}
+Any normal matrix is diagonalisable because any orthonormal basis is an eigenbasis.
+\end{theorem}
+
+\begin{proof}
+$$\mathcal{V}_{\lambda} \otimes \mathcal{V}_{\lambda}^{\perp} = \mathcal{V}$$ 
+\end{proof}
+
+\clearpage
+
+
+
+
+\subsection{Positive definite bilinear form}
+
+\begin{definition}[\textbf{positive definite bilinear form}]\label{def:positive-definite}
+The function $\langle \cdot, \cdot \rangle: \VR \times \VR \to \R$ is positive definite bilinear form if it satisfies:\\
+$\bullet$ linear +  linear: $\langle \x, \cdot \rangle$ and $\langle \cdot, \y \rangle$ are both linear maps, 
+i.e., $\langle k\x_1+\x_2, \cdot  \rangle = k \langle \x_1, \cdot \rangle + \langle  \x_2, \cdot \rangle,  ~\ \langle \cdot, k\y_1+\y_2 \rangle = k \langle \cdot, \y_1 \rangle + \langle \cdot, \y_2 \rangle, ~\ \forall k \in \R, \x_1, \x_2, \y_1, \y_2 \in \VR$ \\
+$\bullet$ symmetry: $\langle \x, \y \rangle = \langle \y,\x \rangle, ~\ \forall \x, \y \in \VR$;\\
+$\bullet$ positivity: $ \langle \x, \x \rangle > 0, ~\ \forall \textnormal{ nonzero } \x \in \VR.$
+\end{definition}
+
+\begin{remark}
+The field $\F$ of positive definite bilinear forms must be $\R$, because \textbf{positivity} only makes sense in $\R$, not even in $\C$, let alone other fields, such as, $\mathbb{Z}_p$ with prime $p$. 
+Note that we later talk about Hermitian form which is defined in $\C$ but also satisfies positivity. 
+This is because the Hermitian form of two same arguments is guaranteed to be a real number, though Hermitian form is defined in $\C$.
+\end{remark}
+
+\begin{proposition}[\textbf{matrices of positive definite bilinear forms}]
+The matrix of the positive definite bilinear form $\langle \cdot, \cdot \rangle$ on $\VR$ w.r.t. basis $\mathcal{B} = \{\vv_i\}_{i=1}^n$ is defined as
+%
+\begin{equation*}
+    \b{A} = [\b{a}_{ij}] \textnormal{  with  } \b{a}_{ij} = \langle \vv_i, \vv_j \rangle,
+\end{equation*}
+%
+which satisfies:\\
+$\bullet$ $ \langle \x, \y \rangle = \x^\T_{\mathcal{B}} \b{A} \y_{\mathcal{B}}$;\\
+$\bullet$ symmetry: $\bm A = \bm A^\T.$\\
+$\bullet$ positivity: $\x^\T_{\mathcal{B}} \b{A} \x_{\mathcal{B}} > 0, ~\ \forall \textnormal{ nonzero } \x_{\mathcal{B}} \in \R^n$.
+\end{proposition}
+
+\begin{remark}
+For postive definite blinear forms,
+%
+\begin{align*}
+    \textnormal{positivity} \centernot\implies \textnormal{symmetry}.
+\end{align*}
+%
+For example, $\b{A} = 
+%
+\begin{bmatrix}
+1 &1\\
+-1 &1
+\end{bmatrix}$
+satisfies $ [c \>\> d]
+\begin{bmatrix}
+1 &1\\
+-1 &1
+\end{bmatrix}
+\begin{bmatrix}
+c\\
+d 
+\end{bmatrix}
+= c^2 + d^2 > 0 ~\ \forall \textnormal{ nonzero } \begin{bmatrix}
+c\\
+d 
+\end{bmatrix} \in \R^2,$
+%
+but it is not symmetric.
+
+\begin{align*}
+    \textnormal{symmetry} \centernot\implies \textnormal{positivity}.
+\end{align*}
+%
+For example, $\b{A} = 
+%
+\begin{bmatrix}
+1 &2\\
+2 &1
+\end{bmatrix}$
+is symmetric, but
+$ [1 \>\> -1]
+\begin{bmatrix}
+1 &2\\
+2 &1
+\end{bmatrix}
+\begin{bmatrix}
+1\\
+-1 
+\end{bmatrix}
+= -2 < 0$,
+thus positivity is not satisfied.
+%
+\end{remark}
+
+\begin{example}[\textbf{positive definiteness of bilinear form \Cref{example:bf1}}]
+Let $P^2_{\R}$ denote the space of real polynomials of degree at most $2$. 
+The bilinear form $\langle \cdot, \cdot \rangle: P^2_{\R} \times P^2_{\R} \to \R$ is defined by
+%
+$$\langle \f, \g \rangle = \int_{0}^1 \f(x) \g(x) \operatorname{d\textnormal{x}}.$$
+%
+$\bullet$ Verify symmetry: $\langle \f, \g \rangle = \int_{0}^1 \f(x) \g(x) \operatorname{d\textnormal{x}} = \int_{0}^1 \g(x) \f(x) \operatorname{d\textnormal{x}} = \langle \g,\f \rangle, ~\ \forall \f, \g \in P^2_{\R}.$ \\
+$\bullet$ Verify positivity: $\langle \f, \f \rangle = \int_{0}^1 \f^2(x) \operatorname{d\textnormal{x}} > 0 \ \forall \f \neq 0.$ \\
+% It has been checked that the determinant of every upper-left $k \times k$ submatrix $\b{A}_k, \ k \in \{1, \cdots, n\}$ of symmetric matrix $\b{A}$ are all positive, hence $\b{A}$ is positive definite.\\
+Therefore, such bilinear form is positive definite.
+\end{example}
+
+\begin{example}[\textbf{non-positive definiteness of bilinear form \Cref{example:bf2}}]
+The bilinear form $\langle \cdot, \cdot \rangle: \R^2 \times \R^2 \to \R$ is defined by 
+%
+$$\langle \x, \y \rangle = x_1y_1 + 2x_1y_2 + 2x_2y_1 + 3x_2y_2,$$ 
+%
+where $\x =
+\begin{bmatrix}
+    x_1 \\
+    x_2
+\end{bmatrix}$, 
+$\y = 
+\begin{bmatrix}
+    y_1 \\
+    y_2
+\end{bmatrix}
+$.\\
+$\bullet$ Verify symmetry: $\langle \x, \y \rangle = x_1y_1 + 2x_1y_2 + 2x_2y_1 + 3x_2y_2 = \langle \y,\x \rangle, ~\ \forall \x, \y \in \R^2.$ \\
+$\bullet$ Positivity not satisfied: $\langle \x, \x \rangle = x_1^2 + 4x_1x_2 +3x_2^2 = (x_1+2x_2)^2 - x_2^2.$
+If $x_1 = -2x_2$ and $x_2 \neq 0$, then $\langle \x, \x \rangle < 0$.\\
+Therefore, this bilinear form is \textbf{NOT} positive definite.
+\end{example}
+
+\begin{proposition}[\textbf{positive definite bilinear form and orthonormal basis}]
+Any bilinear form $\langle \cdot, \cdot \rangle$ on $\VR$ is positive definite, if and only if there exists an orthonormal basis of  $\VR$ w.r.t. the bilinear form. 
+\end{proposition}
+%
+\begin{proof}
+    ???
+\end{proof}
+%
+\begin{remark}[\textbf{Gram-Schmidt process}]
+The orthonormal basis of $\VR$ w.r.t. a positive definite form can always be found by Gram-Schmidt process, which reduces a random basis to an orthonormal one.
+\end{remark}
+%
+\begin{proof}
+    ???
+\end{proof}
+%
+
+
+
+\begin{definition}[\textbf{unitary}]
+Given a positive definite bilinear form $\langle \cdot, \cdot \rangle$. The linear map $\bm M$ is unitary, if 
+$$\langle \b{M}\x, \b{M}\y \rangle = \langle \x, \y \rangle, ~\  \forall \x,\y \in \VF. $$
+\end{definition}
+%
+\begin{theorem}
+Any unitary linear map is normal.
+\end{theorem}
+
+
+
+
+
+\subsection{Hermitian Form}
+
+
+\[
+\begin{tikzcd}
+& 
+&\parbox{5em}{\textnormal{linear map} \\ \centering \textnormal{(l.m.)}}
+\arrow[dll]
+\arrow[dd] 
+\arrow[dddll] 
+\arrow[loop right, dashed, out=-35, in=-15, looseness = 16] 
+&  
+\\
+\parbox{6em}{\textnormal{diagonalisable} \\ \centering \textnormal{l.m.}}
+\arrow[drr, crossing over, "\mathcal{V}_{\lambda} \otimes \mathcal{V}_{\lambda}^{\perp} = \mathcal{V}"' red] 
+& 
+& 
+&|[OliveGreen]| 
+\parbox{10em}{\centering \textnormal{adjoint} \\ 
+$\langle \b{Mx}, \b{y} \rangle_\text{H} = \langle \x,\b{M^*}\y \rangle_\text{H}$ \\ $\b{M^*} = \overline{\b{A}}^{-1}\b{\overline{M}}^{\T}\b{\overline{A}}$}
+\arrow[dl, dashed, OliveGreen] 
+& |[OliveGreen]| 
+\parbox{9em}{\centering \textbf{Hermitian form} \\
+$\langle \b{x}, \b{y} \rangle_\text{H} = \b{x^\T A \bar{y}}$ \textnormal{with} \\
+$\b{A}^\T = \overline{\b{A}}$ \\
+$\b{x^\T A \bar{x}} >0 ~\ \forall \b{x} \neq \b{0}$}
+\arrow[l, dashed, OliveGreen] 
+\arrow[lllldd, bend left=15, dashed, OliveGreen]
+\arrow[d, squiggly, OliveGreen]
+\\
+&  
+& |[OliveGreen]|
+\parbox{6em}{\centering \textnormal{normal l.m.} \\ 
+$\b{M^*M} = \b{MM^*}$}
+\arrow[dll]
+&
+&\parbox{7em}{orthonormal basis of $\VC$:\\ 
+$\bullet$ \textnormal{exists: the matrix of p.d.b.f. w.r.t such basis is identity matrix} \\ 
+$\bullet$ \textnormal{not unique: change-of-basis matrix is \textcolor{OliveGreen}{\underline{unitary}} matrix}}
+\\
+|[OliveGreen]| 
+\parbox{8em}{\centering \textnormal{unitary l.m.} \\ 
+$\langle \b{Mx}, \b{My} \rangle_\text{H} = \langle \x,\y \rangle_\text{H}$}
+\arrow[rrr, squiggly, OliveGreen]
+&
+&
+& \parbox{7em}{\textnormal{the matrix of a unitary l.m. w.r.t an orthonormal basis is \textcolor{OliveGreen}{\underline{unitary}} matrix } $\b{M^\T \bar{M} = I}$}
+\arrow[ru, dashed, no head, out=-50, in = -80, OliveGreen]
+\end{tikzcd}
+\]
+
+
+\begin{definition}[\textbf{Hermitian form}]
+Let a map $\langle \cdot, \cdot \rangle_\text{H}: \VC \times \VC \to \C$. The map $\langle \cdot, \cdot \rangle_\text{H}$ is called a Hermitian, if it satisfies:\\ 
+$\bullet$ linearity and conjugate linearity: $\langle \x, \cdot \rangle_\text{H} $ is linear and $\langle \cdot, \y \rangle_\text{H} $ is conjugate linear, i.e.,$\langle k\x_1+\x_2, \cdot  \rangle_\text{H} = k \langle \x_1, \cdot \rangle_\text{H} + \langle  \x_2, \cdot \rangle_\text{H}$,  $\langle \cdot, k\y_1+\y_2 \rangle_\text{H} = \bar{k} \langle \cdot, \y_1 \rangle_\text{H} + \langle \cdot, \y_2 \rangle_\text{H} ~\ \forall k \in \C, \x_1, \x_2, \y_1, \y_2 \in \VC$; \\
+$\bullet$ conjugate symmetry: $\langle \x, \y \rangle_\text{H} = \overline{\langle \y,\x \rangle}_\text{H} $;\\
+$\bullet$ positivity: $ \langle \x, \x \rangle_\text{H} > 0, ~\ \forall \textnormal{ nonzero } \x \in \VC.$ [Note:$\langle \x, \x \rangle_\text{H}$ is real, while $\langle \x, \y \rangle_\text{H}$ is not necessarily real.]\\
+\end{definition}
+
+
+\begin{remark}
+Note that a Hermitian is NOT a bilinear form, while a positive-definite map is a bilinear form.
+
+\begin{table}[h]
+\begin{tabular}{|c|c|c|c|}
+\hline
+           & \begin{tabular}[c]{@{}c@{}}bilinear form\\ $\langle \cdot, \cdot \rangle: \VF \times \VF \to \F$\end{tabular} & \begin{tabular}[c]{@{}c@{}}positive definite bilinear form\\ $\langle \cdot, \cdot \rangle: \VR \times \VR \to \R$\end{tabular} & \begin{tabular}[c]{@{}c@{}}Hermitian form\\ $\langle \cdot, \cdot \rangle_\text{H}: \VC \times \VC \to \C$\end{tabular} \\ \hline
+linearity  & linear + linear                                                                                                     & linear + linear                                                                                                               & linear + conjugate linear                                                                                               \\ \hline
+symmetry   & -                                                                                                             & $\langle \x, \y \rangle = \langle \y,\x \rangle$                                                                       & $\langle \x, \y \rangle_\text{H} = \small{\overline{\langle \y,\x \rangle_\text{H}}} $                                               \\ \hline
+positivity & -                                                                                                             & $ \langle \x, \x \rangle > 0, ~\ \forall \textnormal{ nonzero } \x \in \VR$                                                    & $ \langle \x, \x \rangle_\text{H} > 0, ~\ \forall \textnormal{ nonzero } \x \in \VC$                                            \\ \hline
+\end{tabular}
+\end{table}
+\end{remark}
+
+\begin{definition}[\textbf{matrix of a Hermitian form}]
+\label{def:matrix_of_Hermitian_form}
+Given a Hermitian form $\langle \cdot, \cdot \rangle_\text{H}: \VC \times \VC \to \C$ and a chosen basis $\mathcal{B} = \{\e_i\}_{i}$ of $\VC$, construct a matrix 
+\begin{equation*}
+    \b{A} = [\b{a}_{ij}] \textnormal{  with  } \b{a}_{ij} = \langle \e_i, \e_j \rangle_\text{H}.
+\end{equation*}
+Such matrix $\b{A}$ is called the \textbf{matrix of the Hermitian form $\langle \cdot, \cdot \rangle_\text{H}$ w.r.t basis $\mathcal{B}$}.
+\end{definition}
+
+\begin{theorem}[\textbf{properties of the matrix of a Hermitian form}]
+\label{thm:matrix_of_Hermitian_form}
+Given a Hermitian form $\langle \cdot, \cdot \rangle_\text{H}: \VC \times \VC \to \C$, $\b{A}$ is the matrix of the Hermitian form w.r.t the basis $\mathcal{B}= \{\e_i\}_{i}$ of $\VC$.\\
+Claim that\\
+$\bullet$ Matrix expression of a Hermitian form:
+\begin{equation}
+\label{eqn:matrix_of_Hermitian_form}
+ \langle \x, \y \rangle_\text{H} = \x^\T_{\mathcal{B}} \b{A} \bar{\y}_{\mathcal{B}},
+\end{equation}
+where $\x_{\mathcal{B}}$ is the representation of $\x$ w.r.t. basis $\mathcal{B}$, i.e., $\x_{\mathcal{B}} := [k_1, \cdots, k_n]^\T$ if $\x = \sum_{i=1}^n k_i \e_i$ for some $k_i \in \C$.\\
+$\bullet$ matrix of a Hermitian form is self-adjoint (or called Hermitian): $\b{A}^\T = \overline{\b{A}}$;\\
+$\bullet$ matrix of a Hermitian form is positive definite: $\b{x_\mathcal{B}^\T A \bar{x}_\mathcal{B}} > 0 ~\ \forall \b{x}_\mathcal{B} \neq \b{0}$.
+
+\begin{proof}
+Under the basis $\mathcal{B}$, any random $\x, \y \in \VC$ can be expressed as a linear combination of basis elements: $\x = \sum_{i=1}^n k_i \e_i$ and $\y = \sum_{j=1}^n l_j \e_j$ for some $k_i, l_j \in \C$, hence the representations of $\x, \y$ are column vectors $\x_{\mathcal{B}} = [k_1, \cdots, k_n]^\T$ and $\y_{\mathcal{B}} = [l_1, \cdots, l_n]^\T$.\\
+$\bullet$ Matrix expression of a Hermitian form is as below:\\
+using the linearity and conjugate linearity of a Hermitian form, we obtain
+\begin{align*}
+   \langle \x, \y \rangle_\text{H} &= \langle \sum_{i=1}^n k_i \e_i, \sum_{j=1}^n l_j \e_j \rangle_\text{H}\\
+   &= \sum_{i=1}^n k_i \langle \e_i, \sum_{j=1}^n l_j \e_j \rangle_\text{H} ~\ ~\ \textnormal{by linearity}\\
+   &= \sum_{i=1}^n k_i \sum_{j=1}^n \overline{l_j} \langle \e_i, \e_j \rangle_\text{H} ~\ ~\ \textnormal{by conjugate linearity}\\
+   &= \sum_{i=1}^n \sum_{j=1}^n  k_i  a_{ij} \overline{l_j} \\
+   &= [k_1, \cdots, k_n] 
+   \begin{bmatrix}
+    a_{1,1} &\cdots &a_{1,n}\\
+    \vdots  &\ldots &\vdots\\
+    a_{n,1} &\cdots &a_{n,n}
+   \end{bmatrix}
+   \begin{bmatrix}
+   \overline{l_1}\\
+   \vdots\\
+   \overline{l_n}
+   \end{bmatrix}\\
+   &= \x^\T_{\mathcal{B}} \b{A} \bar{\y}_{\mathcal{B}}
+\end{align*}
+
+\noindent $\bullet$ the matrix is self-adjoint (or called Hermitian):\\
+by conjugate symmetry of a Hermitian form: $\forall \x,\y \in \VC, k \in \C,$
+$$\x_{\mathcal{B}}^\T \b{A} \bar{\y}_{\mathcal{B}} 
+= \langle \x, \y \rangle_\text{H} 
+= \overline{\langle \y,\x \rangle}_\text{H}
+= \bar{\y}_{\mathcal{B}}^\T \bar{\b{A}} \x_{\mathcal{B}}
+= (\x_{\mathcal{B}}^\T \bar{\b{A}}^\T \bar{\y}_{\mathcal{B}})^{\T}
+\overset{scalar}{=\mathrel{\mkern-3mu}=\mathrel{\mkern-3mu}=} \x_{\mathcal{B}}^\T \bar{\b{A}}^\T \bar{\y}_{\mathcal{B}}.$$
+Thus, $\b{A} = \bar{\b{A}}^\T$.
+
+\noindent $\bullet$ the matrix is positive definite: \\
+by positivity of a Hermitian form -- $\langle \x, \x \rangle_\text{H} > 0 ~\ \forall \textnormal{ nonzero } \x \in \VC $ and choosing the basis $\mathcal{B}$,
+$$ \x_{\mathcal{B}}^\T \b{A} \bar{\x}_{\mathcal{B}} = \langle \x, \x \rangle_\text{H} > 0, ~\ \forall \textnormal{ nonzero } \x_{\mathcal{B}} \in \C^n .$$
+\end{proof}
+\end{theorem}
+
+
+\begin{remark}
+Following \Cref{thm:matrix_of_Hermitian_form}, any matrix of a Hermitian form is
+\annotate[id=b, comment={\textbf{Definition}: Matrix $\b{A}$ is a \textbf{Hermitian matrix} if it is equal to its conjugate transpose, i.e., $$\b{A} = \overline{\b{A}}^\T.$$
+It is also called a "\textbf{self-adjoint matrix}", if $\b{A}$ is treated as a linear map and $\b{A} = \b{A}^*$ w.r.t. the standard Hermitian form (matrix of the Hermitian form is $\bm I$, proof see \Cref{thm:matrix_of_HF_is_identity}):
+\begin{align*}
+     (\b{Ax})^\T \cdot \bar{\y} &= \x^\T \cdot \overline{\b{A}\y}, \\ 
+     \Leftrightarrow \b{A} &=  \overline{\b{A}}^{\T}
+\end{align*}
+}]
+{\textbf{Hermitian}}
+and
+\annotate[id=r, comment={\textbf{Definition}: Matrix $\b{A}$ is a \textbf{positive definite matrix} if $$\b{x^\T A \bar{x}} >0 \textnormal{ for } \forall \b{x} \neq \b{0}$$}]
+{\textbf{positive definite}.}
+%
+However, a Hermitian matrix does not necessarily correspond to a Hermitian form, as positive definiteness is not necessarily satisfied at the same time.
+\end{remark}
+
+
+\begin{remark}
+For complex matrices, positive definiteness implies Hermitian.
+\end{remark}
+%
+\begin{proof}
+We know that
+$$ \x_{\mathcal{B}}^\T \b{A} \bar{\x}_{\mathcal{B}} > 0  ~\ \forall \textnormal{ nonzero } \x_{\mathcal{B}} \in \C^n .$$
+
+Consider the matrices 
+$\b{M}:=\frac{1}{2}(\b{A} + \bar{\b{A}}^\T)$
+and 
+$ \b{N}:=\frac{1}{2i}(\b{A} - \bar{\b{A}}^\T)$, 
+so that $\b{A} = \b{M} + i\b{N}$. 
+Thus, $\x_{\mathcal{B}}^\T \b{A} \bar{\x}_{\mathcal{B}} = \x_{\mathcal{B}}^\T \b{M} \bar{\x}_{\mathcal{B}} + i \x_{\mathcal{B}}^\T \b{N} \bar{\x}_{\mathcal{B}}$.
+
+Note that $\b{M}$ and $\b{N}$ are Hermitian by definition, then  $\x_{\mathcal{B}}^\T \b{M} \bar{\x}_{\mathcal{B}}$ and $\x_{\mathcal{B}}^\T \b{N} \bar{\x}_{\mathcal{B}}$ are real.
+Since $\x_{\mathcal{B}}^\T \b{A} \bar{\x}_{\mathcal{B}} > 0$
+
+\end{proof}
+
+\begin{theorem}
+\label{thm:matrix_of_HF_is_identity}
+For any Hermitian form, there always exists a basis w.r.t. which the matrix of the Hermitian form is an identity matrix $\bm I$.
+And such basis must be an orthonormal basis.
+\end{theorem}
+
+\begin{proof}
+
+\end{proof}
+
+
+\begin{remark}
+To look for such $\bm P$ in the above theorem, use Gram-Schmidt procress. 
+\end{remark}
+
+
+
+\begin{theorem} \label{hermitian_decomposition}
+Any random matrix can be decomposed into a Hermitian matrix and $\sqrt{-1}$ (or $\mathbf{i}$) times a Hermitian matrix. 
+That says, mathematically, for any random matrix $\b{W}$, there exist matrices $\b{X}$ and $\b{Y}$ such that
+%
+\begin{equation*}
+    \b{W} = \b{X} + \b{Y} \mathrm{i} ,
+\end{equation*}
+%
+where $\b{X} = \b{X}^\dagger$, $\b{Y} = \b{Y}^\dagger$ and $\dagger$ represents the complex conjugate.
+\end{theorem}
+
+\begin{proof}
+Let
+$\b{X} = \frac{\b{W} + \b{W}^\dagger}{2}$ and 
+$\b{Y} = (- \mathrm{i}) \frac{\b{W} - \b{W}^\dagger}{2}.$
+Verify that both $\b{X}$ and $\b{Y}$ are Hermitian matrices.
+
+$$\b{X}^\dagger = \frac{\b{W}^\dagger + \b{W}}{2} = \b{X},$$
+
+$$\b{Y}^\dagger = \frac{\b{W}^\dagger - \b{W}}{2} \mathrm{i} = \b{Y}.$$
+\end{proof}
+
+\begin{remark}
+Hermitian matrices are a very special structure:
+\textbf{Hermitian matrices in matrices are like real numbers within numbers}.
+This decomposition makes any random matrix being decomposed into its 'real' and 'imaginary' part.
+\end{remark}
+
+\begin{corollary}
+In the \Cref{hermitian_decomposition}, $\b{X}$ and $\b{Y}$ commute, if and only if $\b{W}$ is a normal matrix.
+\end{corollary}
+
+\begin{proof}
+Note that \Cref{hermitian_decomposition} says that $\b{X} = \b{X}^\dagger$ and $\b{Y} = \b{Y}^\dagger.$
+
+Since $\b{W} = \b{X} + \b{Y} \mathrm{i}$,
+%
+\begin{align*}
+    \b{W}\b{W}^\dagger - \b{W}^\dagger\b{W}
+&= (\b{X} + \b{Y} \mathrm{i})(\b{X} + \b{Y} \mathrm{i})^\dagger - (\b{X} + \b{Y} \mathrm{i})^\dagger (\b{X} + \b{Y} \mathrm{i}) \\
+&= (\b{X} + \b{Y} \mathrm{i})(\b{X}^\dagger - \b{Y}^\dagger \mathrm{i})- (\b{X}^\dagger - \b{Y}^\dagger \mathrm{i}) (\b{X} + \b{Y} \mathrm{i}) \\
+&= (\b{X}\b{X}^\dagger + \b{Y}\b{X}^\dagger \mathrm{i} - \b{X}\b{Y}^\dagger \mathrm{i} + \b{Y}\b{Y}^\dagger)
+- (\b{X}^\dagger \b{X} + \b{X}^\dagger \b{Y} \mathrm{i} - \b{Y}^\dagger \b{X} \mathrm{i} + \b{Y}^\dagger \b{Y}) \\
+&= (\b{X}\b{X} + \b{Y}\b{X} \mathrm{i} - \b{X}\b{Y} \mathrm{i} + \b{Y}\b{Y})
+- (\b{X} \b{X} + \b{X}\b{Y} \mathrm{i} - \b{Y}\b{X} \mathrm{i} + \b{Y} \b{Y}) \\
+&= 2 (\b{Y}\b{X} - \b{X}\b{Y}) \mathrm{i}
+\end{align*}
+%
+Therefore, $\b{W}$ is normal, iff $\b{X}$ and $\b{Y}$ commute.
+\end{proof}
+
+\begin{corollary}
+Eigenvalues of Hermitian matrices are all real.
+\end{corollary}
+
+\begin{proof}
+    
+\end{proof}
+
+\begin{tikzpicture}
+%
+\begin{scope}[blend group = soft light]
+% circles and a rectangle
+\fill[red!70!, opacity=0.1] (-4,-4) rectangle (5,4);
+\fill[green!100!black, opacity=0.2] (180:1.2) circle (2.4);
+\fill[blue!70!, opacity=0.5]  (0:1.7) circle (2);
+\fill[orange!90!, opacity=0.5] (180:0.6) circle (1.2);
+% intersection
+\clip (180:0.6) circle (1.2);
+\clip (0:1.7) circle (2);
+\fill[pattern=north west lines, pattern color=red!70!black] (0,0) circle (1.2);
+%
+\end{scope}
+% labels 
+\node [text=red!90!] at (0.5,3.2) {all complex-valued matrices};
+\node [text=red!90!] at (0.5,2.8) {$\b{PJP}^{-1}$};
+\node [text=green!30!black] at (-1.2,1.5) {diagonalisable $\b{PDP}^{-1}$};
+\node [text=orange!30!black] at (-1,0.2) {normal};
+\node [text=orange!30!black] at (-1,-0.2) {$\b{UDU}^{-1}$};
+\node [text=blue!30!black] at (2.3,0.5) {matrices with};
+\node [text=blue!30!black] at (2.3,0) {all real};
+\node [text=blue!30!black] at (2.3,-0.5) {eigenvalues};
+\node [text=blue!30!black] at (2.3,-0.9) {$\b{P}(\b{D}_{re} + \b{T}_{s.u.})\b{P}^{-1}$};
+\node [text=red!50!black] at (7,0.2) {Hermitian matrices};
+\node [text=red!50!black] at (7,-0.2) {$\b{UD}_{re}\b{U}^{-1}$};
+\draw [red!30!black, -{Circle}] (5.5,0) -- (0,0);
+%
+\end{tikzpicture}
+
+     
+\begin{theorem}
+The matrix of any Hermitian form, denoted as $\bm A$, can be re-written as $\b{N}^\T \bar{\b{N}}$ for some invertible matrix $\b{N}$.
+\end{theorem}
+
+\begin{theorem}
+polar decomposition (SVD)
+\end{theorem}
+
+\begin{theorem}
+centralizer
+\end{theorem}
+% \begin{theorem}[\textbf{alternative view of bilinear form}]\label{thm:bilinear-def-2}
+% Let $\mathcal{V}^\textnormal{dual} = \{ \textnormal{linear maps} \g: \VF \to \F \}$.
+% Then, any linear map $\G: \VF \to \mathcal{V}^\textnormal{dual}$ defines a bilinear form $\langle \cdot, \cdot \rangle$ on $\VF$, and vice versa. (\hyperref[proof:bilinear-def-2]{proof})
+% \end{theorem}
+
+
+
+\subsection{Collection of proofs}
+
+\noindent \Cref{example:bf1}:
+\begin{proof}[Answer]
+\label{answer:bf1}
+  To verify a bilinear form, we check the dual linearity of $\langle \f, \cdot \rangle$ and $\langle \cdot, \g \rangle$: for $\forall k \in \R$ and $\f,\g \in P^2_{\R},$
+%
+\begin{align*}
+    \langle k\f_1 + \f_2, \g \rangle 
+&= \int_{0}^1 [k\f_1(x)+\f_2(x)] \g(x) \operatorname{d\textnormal{x}} \\
+&= \int_{0}^1 [k\f_1(x)\g(x) +\f_2(x)\g(x)] \operatorname{d\textnormal{x}} \\
+&= k\int_{0}^1 \f_1(x)\g(x) \operatorname{d\textnormal{x}}  + \int_{0}^1 \f_2(x)\g(x) \operatorname{d\textnormal{x}} \\
+&= k\langle \f_1, \g \rangle + \langle \f_2, \g \rangle,
+\end{align*}
+%
+and similarly for $\langle \cdot, \g \rangle$.
+Therefore, this map is a bilinear form.\\
+
+\noindent\\
+\noindent Find the matrix of the bilinear form with respect to the natural basis $\mathcal{B} = \{1, x, x^2 \} = \{ \vv_i | \vv_i = x^{i-1}, i \in \{1,2,3\} \}$:\\
+%
+\begin{equation*}
+    \b{A} = [\b{a}_{ij}] \textnormal{  with  } \b{a}_{ij} = \langle \vv_i, \vv_j \rangle 
+    = \int_{0}^1 x^{i+j-2} \operatorname{d\textnormal{x}}
+    = \frac{1}{i+j-1} x^{i+j-1} \vert_{0}^1
+    = \frac{1}{i+j-1}.
+\end{equation*}
+%
+Thus,
+$$\b{A}=
+    \begin{bmatrix}
+        1   &\frac12  &\frac13\\
+        \frac12    &\frac13  &\frac14\\
+        \frac13    &\frac14  &\frac15
+    \end{bmatrix}.
+$$
+
+\noindent Compute the bilinear form of two random polynomials, say $1 -2x +3x^2$ and $-4 +5x -6x^2$:
+%
+\begin{align*}
+    \langle 1 -2x +3x^2, -4 +5x -6x^2 \rangle 
+    &= [1 ~\ -2 ~\ 3]
+\begin{bmatrix}
+1   &\frac12  &\frac13\\
+\frac12    &\frac13  &\frac14\\
+\frac13    &\frac14  &\frac15
+\end{bmatrix}
+\begin{bmatrix}
+-4\\ 
+5\\ 
+-6
+\end{bmatrix}\\
+&= -3.6833.
+\end{align*}
+
+\end{proof}
+\vspace{1cm}
+
+\noindent \Cref{example:bf2}:
+\begin{proof}[Answer]
+\label{answer:bf2}
+ Check the dual linearity of $\langle \x, \cdot \rangle$ and $\langle \cdot, \y \rangle$: for $\forall k \in \R$ and $\x,\y \in \R^2,$
+%
+\begin{align*}
+    \langle k\x_a + \x_b, \y \rangle 
+&= \langle
+\begin{bmatrix}
+    kx_a^1 + x_b^1\\
+    kx_a^2 + x_b^2
+\end{bmatrix}, 
+\begin{bmatrix}
+    y_1\\
+    y_2
+\end{bmatrix}
+\rangle \\
+&= (kx_{a,1} + x_{b,1})y_1 + 2(kx_{a,1} + x_{b,1})y_2 + 2(kx_{a,2} + x_{b,2})y_1 + 3(kx_{a,2} + x_{b,2})y_2\\
+&= k (x_{a,1}y_1 + 2x_{a,1}y_2 + 2x_{a,2}y_1 + 3x_{a,2}y_2) + (x_{b,1}y_1 + 2x_{b,1}y_2 + 2x_{b,2}y_1 + 3x_{b,2}y_2) \\
+&= k \langle \x_a, \y \rangle + \langle \x_b, \y \rangle
+\end{align*}
+%
+and similarly for $\langle \cdot, \y \rangle$.
+Therefore, this map is a bilinear form.\\
+
+\noindent Find the matrix of the bilinear form with respect to the standard basis $\{ \vv_1 =
+\begin{bmatrix}
+    1\\
+    0
+\end{bmatrix},
+\vv_2=
+\begin{bmatrix}
+    0\\
+    1
+\end{bmatrix} \}$.
+%
+\begin{equation*}
+    \b{A} = [\b{a}_{ij}] \textnormal{  with  } \b{a}_{ij} 
+    = \langle \vv_i, \vv_j \rangle
+    =\left\{ 
+    \begin{array}{ccc}
+    1 &  \mbox{if}  & i=j=1  \\
+    2 &  \mbox{if}  & i=1, j=2 \\
+    2 &  \mbox{if}  & i=2, j=1 \\
+    3 &  \mbox{if}  & i=j=2  \\
+    \end{array}
+    \right.
+\end{equation*}
+%
+Thus,
+$$\b{A}=
+    \begin{bmatrix}
+        1   &2  \\
+        2   &3  \\
+    \end{bmatrix}.
+$$
+
+\noindent Compute the bilinear form of two vectors
+%
+$\begin{bmatrix}
+        1 \\
+        -2
+    \end{bmatrix}$ 
+%
+and 
+%
+$\begin{bmatrix}
+        -3\\
+        4\\
+    \end{bmatrix}$
+%
+in $\R^2$ is 
+%
+\begin{align*}
+    \langle 
+    \begin{bmatrix}
+        1 \\
+        -2
+    \end{bmatrix},
+    \begin{bmatrix}
+        -3\\
+        4
+    \end{bmatrix} 
+    \rangle 
+    &= [1 ~\ -2]
+    \begin{bmatrix}
+        1   &2  \\
+        2   &3  \\
+    \end{bmatrix}
+    \begin{bmatrix}
+    -3\\ 
+    4
+    \end{bmatrix}\\
+&= -7.
+\end{align*}   
+\end{proof}
+\vspace{1cm}
+
+\noindent \Cref{example:bf3}:
+\begin{proof}[Answer]
+\label{answer:bf3}
+    Check the linearity of $\langle \x, \cdot \rangle$ and $\langle \cdot,\y \rangle$:
+%
+\begin{align*}
+    \langle \x_1 + \x_2, \y \rangle &= \Vert \x_1 + \x_2 - \y \Vert \neq \Vert \x_1 - \y \Vert + \Vert \x_2 - \y \Vert = \langle \x_1, \y \rangle + \langle \x_2, \y \rangle; \\
+    \langle k\x, \y \rangle &= \Vert k\x - \y \Vert \neq k \Vert \x - \y \Vert = k \langle \x, \y \rangle.
+\end{align*}
+%
+Therefore, $\langle \x, \cdot \rangle$ is \textbf{NOT} linear, and the map is \textbf{NOT} a bilinear form.
+\end{proof}
+\vspace{1cm}
+
+\noindent \Cref{example:bf4}:
+\begin{proof}[Answer]
+\label{answer:bf4}
+Check the dual linearity of $\langle \x, \cdot \rangle$ and $\langle \cdot, \y \rangle$: for $\forall k \in \R$ and $\x,\y \in \R^n,$
+%
+\begin{align*}
+    \langle k\x_1 + \x_2, \y \rangle 
+&= (k\x_1 + \x_2) \cdot \y \\
+&= k\x_1 \cdot \y + \x_2 \cdot \y \\
+&= k \langle \x_1, \y \rangle + \langle \x_2, \y \rangle
+\end{align*}
+%
+and similarly for $\langle \cdot, \y \rangle$.
+Therefore, this map is a bilinear form.\\
+
+\noindent Find the matrix of the bilinear form with respect to the standard basis $\{\e_1, \e_2, \cdots, \e_N \}$ where the $i^{th}$ entry of $\e_i$ is $1$ and other entries are all zeros.
+%
+\begin{equation*}
+    \b{A} = [\b{a}_{ij}] \textnormal{  with  } \b{a}_{ij} 
+    = \langle \e_i, \e_j \rangle
+    =\left\{ 
+    \begin{array}{ccc}
+    0 &  \mbox{if}  & i \neq j  \\
+    1 &  \mbox{if}  & i=j,
+    \end{array}
+    \right.
+\end{equation*}
+%
+Thus,
+$$\b{A}=
+    \begin{bmatrix}
+        1   &0  &0\\
+        0   &1  &0\\
+        0   &0  &1
+    \end{bmatrix}.
+$$
+
+\noindent Compute the bilinear form (inner prod) of two vectors
+%
+$\begin{bmatrix}
+        1 \\
+        -2\\
+        3
+    \end{bmatrix}$ 
+%
+and 
+%
+$\begin{bmatrix}
+        -4\\
+        5\\
+        -6
+    \end{bmatrix}$
+%
+in $\R^3$ is 
+%
+\begin{align*}
+    \langle 
+    \begin{bmatrix}
+        1 \\
+        -2\\
+        3
+    \end{bmatrix},
+    \begin{bmatrix}
+        -4\\
+        5\\
+        -6
+    \end{bmatrix} 
+    \rangle 
+    &= [1 ~\ -2 ~\ 3]
+    \begin{bmatrix}
+        1   &0  &0\\
+        0   &1  &0\\
+        0   &0  &1
+    \end{bmatrix}
+    \begin{bmatrix}
+    -4\\ 
+    5\\ 
+    6
+    \end{bmatrix}\\
+&= -32.
+\end{align*}
+\end{proof}
+\vspace{1cm}
+
+\noindent \Cref{thm:bilinear-def-2}: 
+Let $\mathcal{V}^\textnormal{dual} = \{ \textnormal{linear maps} \g: \VF \to \F \}$.
+Then, any bilinear form $\langle \cdot, \cdot \rangle$ on $\VF$ defines a linear map $\G: \VF \to \mathcal{V}^\textnormal{dual}$, and vice versa.
+That says, the two have the same insight though in different forms.
+
+\begin{proof} \label{proof:bilinear-def-2}
+\noindent\\
+\noindent $\bullet \quad \langle \cdot, \cdot \rangle \Rightarrow \G$ \\
+
+\noindent Given a bilinear form $\langle \cdot, \cdot \rangle$, for $\forall \vv, \w \in \VF $, define a map $\G: \VF \to \mathcal{V}^\textnormal{dual}$ by
+$$ \vv \mapsto \g_{\vv}, ~\ \textnormal{for} ~\ \forall \vv $$
+where $$\g_{\vv} (\w) : = \langle \vv, \w \rangle ~\ \textnormal{for} ~\ \forall \w.$$
+%
+(Simple to verify that $\g_{\vv}$ is linear, since $\langle \vv, \cdot \rangle$ is linear.)
+
+\noindent Need to verify that $\G$ is a linear map:
+%
+\begin{align*}
+    \G (k\vv_1 + \vv_2) &= \g_{k\vv_1 + \vv_2}\\
+    &= \langle k\vv_1 + \vv_2, \cdot \rangle \\
+    &= k \langle \vv_1, \cdot \rangle + \langle \vv_2, \cdot \rangle \\
+    &= k\g_{\vv_1} + \g_{\vv_2} \\
+    &= k\G (\vv_1) + \G(\vv_2).
+\end{align*}
+
+
+
+\noindent $\bullet \quad \G \Rightarrow \langle \cdot, \cdot \rangle$ \\
+
+\noindent Given $\G: \VF \to \mathcal{V}^\textnormal{dual}$, define a map $\langle \cdot, \cdot \rangle: \VF \times \VF \to \F$ by
+%
+$$ (\vv, \w) \mapsto \g_{\vv}(\w), ~\ \textnormal{for} ~\ \forall \vv, \w $$
+%
+where $$\g_{\vv} : = \G(\vv) ~\ \textnormal{for} ~\ \forall \vv.$$
+
+\noindent Need to verify that $\langle \cdot, \cdot \rangle$ is bilinear: \\
+For $\forall k \in \F$ and $\forall \vv, \w \in \VF$,
+%
+\begin{align*}
+    \langle \vv, k\w_1+\w_2 \rangle &= \g_{\vv}(k\w_1+\w_2)\\
+    &=k\g_{\vv}(\w_1) + \g_{\vv}(\w_2) \quad \textnormal{due to linearity of } \g_{\vv}(\cdot)\\ 
+    &=k\langle \vv,\w_1 \rangle + \langle \vv,\w_2 \rangle.
+\end{align*}
+%
+\begin{align*}
+    \langle k\vv_1+\vv_2, \w \rangle &= \g_{k\vv_1+\vv_2}(\w) \\
+    &= [\G(k\vv_1+\vv_2)](\w) \\ 
+    &= [k\G(\vv_1) + \G(\vv_2)](\w) \quad \textnormal{due to linearity of } \G(\cdot)\\ 
+    &= [k\g_{\vv_1} + \g_{\vv_2}](\w)   \\ 
+    &= k\g_{\vv_1}(\w) + \g_{\vv_2}(\w) \\
+    &= k\langle \vv_1,\w \rangle + \langle \vv_2,\w \rangle.
+\end{align*}
+%
+Thus, $\langle \vv, \cdot \rangle$ and $\langle \cdot, \w \rangle$ are both linear maps.
+\end{proof}
+
+
+\begin{proposition}
+    Let $\bm f$ be a linear map from $\VF$ to $\VF$.
+    The map $(\b{f} - a \b{I})^n$, where $a \in \F$, $n$ is non-negative integer in $\F$ and $\b{I}$ is an identity function, preserves the eigenspace $V_{\mu}^{\b{f}}$ of $\bm f$ w.r.t. the eigenvalue $\mu$.\\
+    If $a \neq \mu$, then the map $(\b{f} - a \b{I})^n$ is an isomorphism on $V_{\mu}^{\b{f}}$.
+\end{proposition}
+%
+\begin{proof}
+    Sketch the proof.\\
+    For any $\w \in V_{\mu}^{\b{f}}$, we can write $(\b{f} - \mu \b{I})^m \w = \b{0}$ for some integer $m$ and we choose the smallest $m$.\\
+    WTS: \\
+    $\bullet$ $(\b{f} - a \b{I})^n \w \in V_{\mu}^{\b{f}}, \textnormal{ i.e., }  (\b{f} - \mu \b{I})^m (\b{f} - a \b{I})^n \w = \b{0}.$\\
+    %
+    $\bullet$ $ a \neq \mu \implies \{ (\b{f} - a \b{I})^n\w | \w \in V_{\mu}^{\b{f}}\} = V_{\mu}^{\b{f}}.$\\
+
+    For the first bullet point, we could show that $(\b{f} - \mu \b{I})$ and $(\b{f} - a \b{I})$ commute by direct computation.
+    Then, 
+    $(\b{f} - \mu \b{I})^m (\b{f} - a \b{I})^n \w =  (\b{f} - a \b{I})^n [(\b{f} - \mu \b{I})^m \w] = (\b{f} - a \b{I})^n \b{0} = \b{0}.$
+
+
+
+
+    
+    There always exist polynomials $F(x)$ and $G(x)$, such that 
+    $$F(x) (x-a)^n + G(x) (x-\mu)^m = 1.$$
+    Therefore,
+\end{proof}

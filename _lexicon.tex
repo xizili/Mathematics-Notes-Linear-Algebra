@@ -1,0 +1,215 @@
+\section{Lexicon}
+
+
+\begin{definition}[\textbf{vector space}] 
+\label{def:vector-space}
+Given some field $\mathcal{F}$, a set $\mathcal{V}$ is called a \textbf{vector space} over the field $\mathcal{F}$ if the operations of addition and scalar multiplication are defined on $\mathcal{V}$ such that 
+$$ \b{x} + \b{y} \in \mathcal{V} \>\> \text{and} \,\,\, c\b{x} \in \mathcal{V}$$
+for any $ \b{x}, \b{y} \in \mathcal{V}$ and $c \in \mathcal{F}$. 
+\end{definition}
+
+Note that no field, no vector space.
+A field shows up before a vector space is defined.
+To emphasise the significance of the field, in this note I call the vector space $\mathcal{V}$ over the field $\mathcal{F}$ by $\mathcal{V}_{\mathcal{F}}$.
+
+\begin{definition}[\textbf{basis}]
+A collection of vectors $\{v_i\}_i$ in the vector space $\mathcal{V}_{\mathcal{F}}$ constitute a \textbf{basis} of $\mathcal{V}_{\mathcal{F}}$ if $\{v_i\}_i$ contains the \textbf{least} number of elements that can \textbf{span} the vector space $\mathcal{V}_{\mathcal{F}}$, i.e., 
+\begin{enumerate}
+    \item \textbf{uniqueness}: any nonzero vector in $\mathcal{V}_{\mathcal{F}}$ is uniquely determined by a linear combination\footnote{addition and scalar multiplication; the latter involves elements of $\mathcal{F}$.} of $\{v_i\}_i$;
+    \item \textbf{least number}: any other collection of vectors $\{w_i\}_i$ that satisfies the previous condition has no less elements than $\{v_i\}_i$.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[\textbf{dimensionality}]
+The \textbf{dimension} of a vector space $\mathcal{V}_{\mathcal{F}}$ is the dimension of the basis of $\mathcal{V}_{\mathcal{F}}$, i.e., the number of elements in a basis of $\mathcal{V}_{\mathcal{F}}$.
+\end{definition}
+
+\note[id=b]{
+Example:\\
+the dimension of vector space $\mathbb{R}^2$ over field $\mathbb{R}$ is 2; \\
+the dimension of vector space $\mathbb{C}$ over field $\mathbb{R}$ is 2; \\
+the dimension of vector space $\mathbb{C}$ over field $\mathbb{C}$ is 1.}
+
+
+\begin{textremark*}{Motivating Linearity}
+A map links \textbf{elements} --- projecting any element in domain (some set $A$) to some element in co-domain (some set $B$), while a \underline{\textbf{linear}} map also links \textbf{relationships between elements} --- projecting the additive ($+$) and scalar multiplicative ($\cdot$) operations within domain to those within co-domain.\\
+Motivated by such difference, we note that \\
+$\bullet$ firstly, the domain and co-domain of a linear map have to be (at least) vector spaces, not just sets, because otherwise $+$ and $\cdot$ are not equipped.\\
+$\bullet$ secondly, for domain $(\mathcal{V}_{\mathcal{F}}, +_{\mathcal{V}_{\mathcal{F}}}, \cdot_{\mathcal{V}_{\mathcal{F}}})$ and co-domain $(\mathcal{W}_{\mathcal{F}}, +_{\mathcal{W}_{\mathcal{F}}}, \cdot_{\mathcal{W}_{\mathcal{F}}})$ of a map $\f$:\\
+$\f: \b{x} +_{\mathcal{V}_{\mathcal{F}}} \b{y} \mapsto \f(\b{x}) +_{\mathcal{W}_{\mathcal{F}}} \f(\b{y})$ is not trivial;\\
+$\f: c \cdot_{\mathcal{V}_{\mathcal{F}}} \b{x} \mapsto c \cdot_{\mathcal{W}_{\mathcal{F}}} \f(\b{x})$ is not trivial.\\
+It needs to be specifically defined.
+\end{textremark*}
+
+\begin{definition}[\textbf{linear map}] 
+\label{def:linear-map}
+A map from $\f(\cdot)$ from the vector space $\mathcal{V}_{\mathcal{F}}$ to the vector space $\mathcal{W}_{\mathcal{F}}$ is \textbf{linear} if addition and scalar multiplication are preserved under this map, i.e., 
+$$\f( \b{x} + \b{y} ) = \f(\b{x}) + \f(\b{y}),$$
+$$\f(c \b{x}) = c \f(\b{x}),$$
+for $\b{x}, \b{y} \in \mathcal{V}_{\mathcal{F}}$ and $c \in \mathcal{F}$. 
+\end{definition}
+
+
+
+
+\begin{corollary}: 
+Any linear map has a unique matrix representation under a chosen basis of the domain and a chosen basis of co-domain.
+\end{corollary}
+
+\begin{proof} 
+For a linear map $\f(\cdot): \mathcal{V}_{\mathcal{F}} \to \mathcal{W}_{\mathcal{F}}$  (assuming finite dimensions of domain and co-domain), choose a basis $\{\b{a}_i\}_{i=1}^N$ of $\mathcal{V}_{\mathcal{F}}$ and a basis $\{\b{b}_i\}_{i=1}^M$ of $\mathcal{W}_{\mathcal{F}}$. 
+
+Arrange the two bases in order as the columns of matrices:
+$\b{A} = \left[\b{a}_1 | \b{a}_2 | \cdots | \b{a}_N \right]$ and $\b{B} = [\b{b}_1 | \b{b}_2 | \cdots | \b{b}_M]$.
+
+Let $\b{y}_i := \f(\b{a}_i)$ for $i \in \{1,2,\cdots,N\}$. 
+
+Decompose $\b{y}_i$ by the chosen basis of $\mathcal{W}_{\mathcal{F}}$, $\b{y}_i =\sum_{j=1}^{M} k_{j,i}\b{b}_j$ for some $d_{i,j} \in \mathcal{F}$. 
+
+Therefore, the mapping of basis vectors 
+$$\f: \b{a}_i \mapsto \b{y}_i $$
+could be represented under the chosen bases $\b{A}$ and $\b{B}$ 
+by
+$$\operatorname{f_{\b{A,B}}}: [0, 0, \cdots, 0, \underbrace{1}_{ith}, 0, \cdots, 0]^\T \mapsto [k_{1,i}, k_{2, i}, \cdots, k_{M, i}]^\T.$$
+
+
+For any $\b{x} \in \mathcal{V}_{\mathcal{F}}$,  $\b{x} =\sum_{i=1}^{N} c_i\b{a}_i$ for some $c_i \in \mathcal{F}$.
+
+Then, since $\f$ if a linear map, we obtain
+$$\f(\b{x}) = \f(\sum_{i=1}^{N} c_i\b{a}_i) = \sum_{i=1}^{N} c_i \f(\b{a}_i) = \sum_{i=1}^{N} c_i \sum_{j=1}^{M} k_{j, i}\b{b}_j,$$
+i.e.,
+$$\f: \sum_{i=1}^{N} c_i\b{a_i} \mapsto \sum_{i=1}^{N} \sum_{j=1}^{M} c_i k_{j, i}\b{b}_j,$$
+or equivalently,
+$$\f:
+\left[ \b{a_1} | \b{a_2}| \cdots |\b{a_N} \right]\begin{bmatrix}
+c_1 \\
+c_2 \\
+\vdots \\
+c_N
+\end{bmatrix}
+\mapsto 
+\left[ \b{b_1} | \b{b_2}| \cdots |\b{b_M} \right]
+\begin{bmatrix}
+k_{1,1} &k_{1,2} &\cdots &k_{1,N} \\
+k_{2,1} &k_{2,2} &\cdots &k_{2,N} \\
+\vdots  &\vdots  &\ddots &\vdots  \\
+k_{M,1} &k_{M,2} &\cdots &k_{M,N} 
+\end{bmatrix}
+\begin{bmatrix}
+c_1 \\
+c_2 \\
+\vdots \\
+c_N
+\end{bmatrix}.
+$$
+
+This map could be re-written in a matrix representation under the chosen bases $A$ and $B$ by
+$$\operatorname{f_{\b{A,B}}}:
+\begin{bmatrix}
+c_1 \\
+c_2 \\
+\vdots \\
+c_N
+\end{bmatrix}
+\mapsto 
+\begin{bmatrix}
+k_{1,1} &k_{1,2} &\cdots &k_{1,N} \\
+k_{2,1} &k_{2,2} &\cdots &k_{2,N} \\
+\vdots  &\vdots  &\ddots &\vdots  \\
+k_{M,1} &k_{M,2} &\cdots &k_{M,N} 
+\end{bmatrix}
+\begin{bmatrix}
+c_1 \\
+c_2 \\
+\vdots \\
+c_N
+\end{bmatrix}.
+$$
+
+
+Therefore, the linear map $f$ has a matrix representation $\b{K}$ under the chosen bases $A$ and $B$ in a way that $$\operatorname{f_{\b{A,B}}}(\b{c}) = \b{Kc},$$
+where $\b{c} = [c_1, c_2, \cdots, c_N]^\T \in \mathcal{F}^N$ and
+$$ \b{K} =
+\begin{bmatrix}
+k_{1,1} &k_{1,2} &\cdots &k_{1,N} \\
+k_{2,1} &k_{2,2} &\cdots &k_{2,N} \\
+\vdots  &\vdots  &\ddots &\vdots  \\
+k_{M,1} &k_{M,2} &\cdots &k_{M,N} 
+\end{bmatrix}.
+$$
+\end{proof}
+
+
+Note: 
+
+$\bullet$ For any element $\b{x} \in \mathcal{V}_{\mathcal{F}}$, its representation $\b{c} \in \mathcal{F}^N$ is different under various bases.
+
+$\bullet \,\,  \mathcal{V}_{\mathcal{F}} \cong \mathcal{F}^N$.
+
+$\bullet \,\, \f$ is reduced to $\operatorname{f_{\b{A,B}}}$ under given bases $\b{A,B}$. 
+
+
+
+\begin{definition} 
+A vector $\b{v}$ is an \textbf{eigenvector} of the linear map $\f(\cdot)$ from vector space $\mathcal{V}_{\mathcal{F}}$ to itself if it satisfies 
+$$\f( \b{v} ) = \lambda \b{v},$$
+for some $\lambda \in \mathcal{F}$. 
+\end{definition}
+
+Note: $\bullet$ the map has to be linear, because otherwise this definition is useless in the sense that $c\b{v}$($c \in \mathcal{F}$) is no long an eigenvector when $\b{v}$ is an eigenvector thereby; $\bullet$ the co-domain of the map has to be the same as the domain, because otherwise the equality cannot hold.
+
+\begin{definition} 
+An isomorphism between vector spaces $\mathcal{V}_{\mathcal{F}}$ and $\mathcal{W}_{\mathcal{F}}$ is a bijective linear map between them.
+\end{definition}
+
+\textbf{Note}:two vector spaces of the same finite dimensionality over the same field are isomorphic, e.g., $\mathbb{R}^2$ over $\mathbb{R}$ and $\mathbb{C}$ over $\mathbb{R}$ are isomorphic; but $\mathbb{R}^2$ over $\mathbb{R}$ and $\mathbb{C}$ over $\mathbb{C}$ are NOT isomorphic, actually there exists no linear map between these two vector spaces because linearity requires the same field of domain and codomain (whereas `map' does not require the same field).
+
+\textbf{Warning}: isomorphism $\neq$ canonical isomorphism. see category theory.
+
+
+\subsection{Invertibility}
+
+\begin{definition}
+For matrix $\bm A$, if there exists $\bm A^{-1}$ such that $\bm A^{-1} \bm A = \bm A \bm A^{-1} = \bm I$, then $\bm A$ is invertible and its inverse is
+%
+\begin{equation*}
+    \bm A^{-1}  =  \frac{1}{\det(\bm A)} \operatorname {adj}(\bm A),
+\end{equation*}
+%
+where $\operatorname {adj}(\bm A)$ is the adjugate of $\bm A$: 
+$\operatorname {adj}(\bm A) = \left[ (-1)^{i+j} \b{M}_{ij} \right]_{1\leq i,j\leq n}^\T$,
+and $\b{M}_{ij}$ is the determinant of the $(n-1) \times (n-1)$ matrix that results from deleting row $i$ and column $j$ of $\bm A$.
+\end{definition}
+
+\begin{remark}
+Note the following equality holds:
+%
+\begin{equation*}
+    \bm A \operatorname {adj}(\bm A) =   \operatorname {adj}(\bm A) \bm A = \det(\bm A) \b{I},
+\end{equation*}
+%
+Test it with 2-dimensional and 3-dimensional matrices for intuition.
+\end{remark}
+
+
+
+\begin{theorem}
+    \begin{align*}
+        \textnormal{matrix } \bm A \textnormal{ is invertible.}
+        &\Leftrightarrow \bm B \bm A = \bm I \textnormal{ for some matrix } \bm B 
+        \Leftrightarrow   \bm A \bm B = \bm I\\
+        &\Leftrightarrow \b{Av} = \b{0} \textnormal{ implies } \bm v = \bm 0 \\
+        &\Leftrightarrow \textnormal{Matrix } \bm A \textnormal{ as the representation of a linear map} \f \textnormal{ on the vector space } \VF  \\ 
+        & \qquad \textnormal{over some basis is injective, i.e.,} \operatorname{ker}(\f) = \{ \bm 0 \}  \\
+        &\Leftrightarrow \textnormal{The linear map is surjective, i.e.,} \operatorname{imag}(\f) = \VF \\
+        &\Leftrightarrow \textnormal{The linear map is bijective} \\
+        &\Leftrightarrow \textnormal{The rows/columns as vectors form a basis of the space } \VF \\
+        &\Leftrightarrow \det(\bm A) \neq 0 \\
+        &\Leftrightarrow \bm A \textnormal{ has no eigenvalue of zero} 
+    \end{align*}
+\end{theorem}
+
+
+\begin{remark}
+For any linear map $\f: \VF \to \VF$ where $\VF$ is a finite-dimension vector space, $\f$ is injective implies that $\f$ is surjective, and vise versa.
+\end{remark}

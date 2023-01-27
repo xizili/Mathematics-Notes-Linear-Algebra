@@ -1,0 +1,50 @@
+
+\usepackage{etex}
+\usepackage{libertine}
+\usepackage{sfmath,graphicx,soul,booktabs} %comment
+\usepackage[top=2cm,bottom=2.5cm,left=2cm,right=4cm]{geometry} %
+\usepackage{multicol}
+\usepackage{amsmath,amssymb,bm,framed,authblk}
+\usepackage{amsthm,mathtools,mathrsfs,centernot}
+
+
+\usepackage[dvipsnames,svgnames,x11names]{xcolor}
+\usepackage{tikz-cd}
+\usetikzlibrary{graphs,decorations.pathmorphing,decorations.markings,cd}
+\usepackage{tikz}
+\usetikzlibrary{patterns}
+
+\usepackage{lineno}
+\usepackage[compress]{natbib}
+
+\definecolor{dblue}{HTML}{56B4E9}
+\definecolor{dred}{rgb}{0.6,0,0}
+\definecolor{dgreen}{rgb}{0,0.6,0} 
+
+
+\usepackage{xr}
+\usepackage[colorlinks=true,linkcolor=dblue,citecolor=dred]{hyperref}
+\usepackage[nameinlink]{cleveref}
+
+% pakage for side notes
+\usepackage[markup=underlined]{changes}
+\definechangesauthor[color=BrickRed,name=red]{r}  %side bar in red
+\definechangesauthor[color=NavyBlue,name=blue]{b} %side bar in blue
+
+
+%%% Alternative definition to have the remarks
+%%% in the margins instead of footnotes
+\usepackage{todonotes}
+\setlength{\marginparwidth}{3cm}
+\makeatletter
+% \setcommentmarkup{\todo[color={authorcolor!10},size=\scriptsize]{#3: #1}}
+\setcommentmarkup{%
+  \todo[
+    textcolor={authorcolor!70!black},
+    backgroundcolor={authorcolor!20!white},
+    linecolor={authorcolor!30!white},
+    size=\scriptsize]%
+  {#1}
+}
+\makeatother
+
